@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📚 Acervo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <h1 class="titulo">📚 Acervo de Livros</h1>
+
+  <div id="mensagem-erro" class="mensagem hidden"></div>
+
+  <section class="secao">
+    <h2>Adicionar Livro</h2>
+    <form id="form-livro" class="form-livro">
+      <input type="text" id="titulo" placeholder="Título do Livro" required />
+      <input type="text" id="autor" placeholder="Autor da Obra" required />
+      <input type="number" id="ano" placeholder="Ano de Publicação" required />
+      <button type="submit" class="btn azul">Adicionar Livro</button>
+    </form>
+  </section>
+
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal-box">
+      <p>Tem certeza que deseja remover o livro <strong id="livro-a-remover"></strong>?</p>
+      <div class="modal-buttons">
+        <button type="button" id="btn-nao" class="btn cinza">Não</button>
+        <button type="button" id="btn-sim" class="btn vermelho">Sim</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="secao">
+    <div class="cabecalho-lista">
+      <h2>Lista de Livros</h2>
+      <div class="form-busca-inline">
+        <input type="text" id="busca" placeholder="Título para Buscar" />
+        <button type="button" onclick="buscarLivro()" class="btn verde">Buscar</button>
+        <button type="button" id="btn-voltar" class="btn cinza hidden" onclick="voltarLista()">Voltar</button>
+      </div>
+    </div>
+    <ul id="resultado"></ul>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es2015", "dom"],
+    "outFile": "app.js",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["app.ts"]
+}
