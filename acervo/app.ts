@@ -4,6 +4,7 @@ type Livro = {
   ano: number;
 };
 
+// 'livros' é o map central, armazenando livros com o título como chave única.
 const livros = new Map<string, Livro>();
 
 const form = document.getElementById('form-livro') as HTMLFormElement;
@@ -36,6 +37,7 @@ let tituloParaRemover: string | null = null;
 let loggedInUsername: string | null = null;
 
 function salvarLivros(): void {
+  // salva o map no localStorage convertendo-o para um array de entradas.
   localStorage.setItem('acervoLivros', JSON.stringify(Array.from(livros.entries())));
 }
 
@@ -43,6 +45,7 @@ function carregarLivros(): void {
   const dadosSalvos = localStorage.getItem('acervoLivros');
   if (dadosSalvos) {
     const livrosArray = JSON.parse(dadosSalvos);
+    // recarrega o map a partir dos dados salvos, usando .set() para cada entrada.
     livrosArray.forEach(([key, value]: [string, Livro]) => {
       livros.set(key, value);
     });
@@ -107,6 +110,7 @@ logoutButton.addEventListener('click', () => {
     localStorage.removeItem('username');
     loggedInUsername = null;
     accountModalOverlay.classList.add('hidden');
+    // limpa todas as entradas do map ao deslogar para uma nova sessão.
     livros.clear(); 
     checkLogin();
 });
@@ -123,11 +127,13 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
+  // verifica se o livro já existe no map usando .has(chave).
   if (livros.has(titulo)) {
     exibirMensagem(`O livro "${titulo}" já está no catálogo!`, 'erro');
     return;
   }
 
+  // adiciona o novo livro ao map com .set(chave, valor).
   livros.set(titulo, { titulo, autor, ano });
   salvarLivros();
   form.reset();
@@ -144,6 +150,7 @@ function buscarLivro(): void {
     return;
   }
 
+  // busca um livro no map usando .get(chave).
   const livro = livros.get(titulo);
 
   ulResultado.innerHTML = '';
@@ -178,11 +185,13 @@ function voltarLista(): void {
 function listarLivros(): void {
   ulResultado.innerHTML = '';
 
+  // verifica se o map está vazio usando .size.
   if (livros.size === 0) {
     ulResultado.innerHTML = `<li>Nenhum livro cadastrado.</li>`;
     return;
   }
 
+  // itera sobre cada livro no map usando .forEach().
   livros.forEach((l) => {
     const li = document.createElement('li');
     li.innerHTML = `
@@ -207,6 +216,7 @@ function removerLivro(titulo: string): void {
 
 btnSim.addEventListener('click', () => {
   if (tituloParaRemover) {
+    // remove um livro do map usando .delete(chave).
     livros.delete(tituloParaRemover);
     salvarLivros();
     listarLivros();
