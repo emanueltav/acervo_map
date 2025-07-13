@@ -8,41 +8,66 @@
 </head>
 <body>
 
-  <h1 class="titulo">📚 Acervo de Livros</h1>
-
-  <div id="mensagem-erro" class="mensagem hidden"></div>
-
-  <section class="secao">
-    <h2>Adicionar Livro</h2>
-    <form id="form-livro" class="form-livro">
-      <input type="text" id="titulo" placeholder="Título do Livro" required />
-      <input type="text" id="autor" placeholder="Autor da Obra" required />
-      <input type="number" id="ano" placeholder="Ano de Publicação" required />
-      <button type="submit" class="btn azul">Adicionar Livro</button>
-    </form>
-  </section>
-
-  <div id="modal-overlay" class="modal-overlay hidden">
-    <div class="modal-box">
-      <p>Tem certeza que deseja remover o livro <strong id="livro-a-remover"></strong>?</p>
-      <div class="modal-buttons">
-        <button type="button" id="btn-nao" class="btn cinza">Não</button>
-        <button type="button" id="btn-sim" class="btn vermelho">Sim</button>
-      </div>
+  <div id="login-screen" class="login-container hidden">
+    <div class="login-box secao">
+      <h2>Acesso ao Acervo</h2>
+      <form id="login-form">
+        <input type="text" id="username" placeholder="Usuário" required />
+        <input type="password" id="password" placeholder="Senha" required />
+        <button type="submit" class="btn azul">Entrar</button>
+        <div id="login-error" class="mensagem erro hidden"></div>
+      </form>
     </div>
   </div>
 
-  <section class="secao">
-    <div class="cabecalho-lista">
-      <h2>Lista de Livros</h2>
-      <div class="form-busca-inline">
-        <input type="text" id="busca" placeholder="Título para Buscar" />
-        <button type="button" onclick="buscarLivro()" class="btn verde">Buscar</button>
-        <button type="button" id="btn-voltar" class="btn cinza hidden" onclick="voltarLista()">Voltar</button>
+  <div id="main-content" class="hidden">
+    <h1 class="titulo">📚 Acervo de Livros</h1>
+    <button id="account-button" class="btn cinza hidden" title="Opções da Conta">Conta</button>
+    
+    <div id="mensagem-erro" class="mensagem hidden"></div>
+
+    <section class="secao">
+      <h2>Adicionar Livro</h2>
+      <form id="form-livro" class="form-livro">
+        <input type="text" id="titulo" placeholder="Título do Livro" required />
+        <input type="text" id="autor" placeholder="Autor da Obra" required />
+        <input type="number" id="ano" placeholder="Ano de Publicação" required />
+        <button type="submit" class="btn azul">Adicionar Livro</button>
+      </form>
+    </section>
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+      <div class="modal-box">
+        <p>Tem certeza que deseja remover o livro <strong id="livro-a-remover"></strong>?</p>
+        <div class="modal-buttons">
+          <button type="button" id="btn-nao" class="btn cinza">Não</button>
+          <button type="button" id="btn-sim" class="btn vermelho">Sim</button>
+        </div>
       </div>
     </div>
-    <ul id="resultado"></ul>
-  </section>
+
+    <section class="secao">
+      <div class="cabecalho-lista">
+        <h2>Lista de Livros</h2>
+        <div class="form-busca-inline">
+          <input type="text" id="busca" placeholder="Título para Buscar" />
+          <button type="button" onclick="buscarLivro()" class="btn verde">Buscar</button>
+          <button type="button" id="btn-voltar" class="btn cinza hidden" onclick="voltarLista()">Voltar</button>
+        </div>
+      </div>
+      <ul id="resultado"></ul>
+    </section>
+  </div>
+
+  <div id="account-modal-overlay" class="modal-overlay hidden">
+    <div class="modal-box">
+      <p>Opções da Conta</p>
+      <div class="modal-buttons">
+        <button id="logout-button" class="btn vermelho">Sair da Conta</button>
+        <button id="close-account-modal" class="btn cinza">Fechar</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

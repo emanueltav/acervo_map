@@ -20,7 +20,20 @@ const spanTitulo = document.getElementById('livro-a-remover') as HTMLSpanElement
 const btnSim = document.getElementById('btn-sim') as HTMLButtonElement;
 const btnNao = document.getElementById('btn-nao') as HTMLButtonElement;
 
+const loginScreen = document.getElementById('login-screen') as HTMLDivElement;
+const mainContent = document.getElementById('main-content') as HTMLDivElement;
+const loginForm = document.getElementById('login-form') as HTMLFormElement;
+const usernameInput = document.getElementById('username') as HTMLInputElement;
+const passwordInput = document.getElementById('password') as HTMLInputElement;
+const loginError = document.getElementById('login-error') as HTMLDivElement;
+
+const accountButton = document.getElementById('account-button') as HTMLButtonElement;
+const accountModalOverlay = document.getElementById('account-modal-overlay') as HTMLDivElement;
+const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+const closeAccountModalButton = document.getElementById('close-account-modal') as HTMLButtonElement;
+
 let tituloParaRemover: string | null = null;
+let loggedInUsername: string | null = null;
 
 function salvarLivros(): void {
   localStorage.setItem('acervoLivros', JSON.stringify(Array.from(livros.entries())));
@@ -46,6 +59,57 @@ function exibirMensagem(texto: string, tipo: 'erro' | 'sucesso' | 'info' = 'info
     mensagemErro.textContent = '';
   }, 3000);
 }
+
+function checkLogin(): void {
+  const loggedIn = localStorage.getItem('loggedIn');
+  loggedInUsername = localStorage.getItem('username');
+
+  if (loggedIn === 'true' && loggedInUsername) {
+    loginScreen.classList.add('hidden');
+    mainContent.classList.remove('hidden');
+    accountButton.classList.remove('hidden');
+    accountButton.textContent = loggedInUsername;
+    carregarLivros();
+  } else {
+    loginScreen.classList.remove('hidden');
+    mainContent.classList.add('hidden');
+    accountButton.classList.add('hidden');
+  }
+}
+
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  if (username === 'emanuel' && password === '123') {
+    localStorage.setItem('loggedIn', 'true');
+    localStorage.setItem('username', username);
+    checkLogin();
+    loginError.classList.add('hidden');
+    loginForm.reset();
+  } else {
+    loginError.textContent = 'Usuário ou senha incorretos!';
+    loginError.classList.remove('hidden');
+  }
+});
+
+accountButton.addEventListener('click', () => {
+    accountModalOverlay.classList.remove('hidden');
+});
+
+closeAccountModalButton.addEventListener('click', () => {
+    accountModalOverlay.classList.add('hidden');
+});
+
+logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('username');
+    loggedInUsername = null;
+    accountModalOverlay.classList.add('hidden');
+    livros.clear(); 
+    checkLogin();
+});
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -157,7 +221,7 @@ btnNao.addEventListener('click', () => {
   modal.classList.add('hidden');
 });
 
-document.addEventListener('DOMContentLoaded', carregarLivros);
+document.addEventListener('DOMContentLoaded', checkLogin);
 
 (window as any).buscarLivro = buscarLivro;
 (window as any).removerLivro = removerLivro;

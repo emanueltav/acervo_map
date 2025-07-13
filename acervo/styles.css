@@ -1,16 +1,17 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f3f3f3;
-  color: #111;
+  background-color: #1a2a3a;
+  color: #f3f3f3;
   padding: 20px;
   max-width: 800px;
   margin: auto;
   line-height: 1.6;
+  position: relative;
 }
 
 .titulo {
   text-align: center;
-  color: #222;
+  color: #fff;
   margin-bottom: 30px;
   font-size: 2.2em;
 }
@@ -21,6 +22,7 @@ body {
   margin-bottom: 25px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  color: #111;
 }
 
 .secao h2 {
@@ -113,6 +115,7 @@ ul#resultado li .info-livro {
   flex-wrap: wrap;
   gap: 20px;
   font-size: 1em;
+  color: #555;
 }
 
 ul#resultado li strong {
@@ -229,6 +232,60 @@ ul#resultado li button {
   border: 1px solid #bee5eb;
 }
 
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a2a3a;
+}
+
+.login-box {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 350px;
+  width: 90%;
+  color: #111;
+}
+
+.login-box h2 {
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1.8em;
+  border-bottom: none;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-form input {
+  padding: 12px;
+  font-size: 1em;
+}
+
+.login-form button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 1.1em;
+}
+
+#account-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    font-size: 1em;
+    white-space: nowrap;
+    z-index: 999;
+}
+
 @media (max-width: 600px) {
   body {
     padding: 15px;
@@ -300,5 +357,11 @@ ul#resultado li button {
   ul#resultado li button {
     align-self: stretch;
     margin-top: 10px;
+  }
+
+  #account-button {
+      position: static;
+      width: 100%;
+      margin-top: 15px;
   }
 }
